@@ -1,3 +1,6 @@
+dummy_app_name = 'rails_app'
+require File.expand_path("../../../../test/#{dummy_app_name}/config/environment", __FILE__)
+
 require 'rails_spec_helper'
 
 # Each time recreate test database with migrations

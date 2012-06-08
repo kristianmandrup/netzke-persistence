@@ -7,16 +7,17 @@ gem 'devise', '~> 2.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'netzke-core'
+gem 'netzke-core', :git => 'git://github.com/nomadcoder/netzke-core.git'
 
-group :development, :test do
+# :development,
+group  :test do
   gem 'capybara'
   gem 'cucumber-rails'
   gem 'cucumber'
   gem 'rspec-rails', ">= 2"
   gem 'spork'
   gem 'launchy'    # So you can do Then show me the page
-  gem 'factory_girl'
+  gem "factory_girl_rails", "~> 3.0"
 end
 
 group :development do
@@ -27,5 +28,5 @@ group :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
 
   gem 'pickle'
-  gem 'database_cleaner', :git => ''
+  gem 'database_cleaner', '~> 0.7'
 end
