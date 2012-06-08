@@ -1,0 +1,10 @@
+development:
+  host: localhost
+  database: netzke_persistence_test
+  port: 27017
+
+test:
+  host: localhost
+  database: netzke_persistence_test
+  port: 27017
+

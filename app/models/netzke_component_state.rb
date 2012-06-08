@@ -67,37 +67,12 @@ class NetzkeComponentState < ActiveRecord::Base
       propagate(hsh)
     end
 
-    private
+    protected
 
-      def propagate(hsh)
-        if masquerade_as.present? && !masquerade_as[:user_id]
-          relation = self.where({:component => component})
-          if masquerade_as[:role_id]
-            relation = relation.includes(:user).where(:users => {:role_id => masquerade_as[:role_id]})
-          end
-          relation.all.each do |r|
-            r.value = r.value.merge(hsh)
-            r.save!
-          end
-        end
+      include Netzke::Persistence::ComponentStateMixin
+
+      def user_component_that_masquerades_as_role relation
+        relation.includes(:user).where(:users => {:role_id => masqueraded_role_id})
       end
-
-      def find_state(or_create_new = false)
-        hsh = {:component => component}
-        if masquerade_as.present?
-          if masquerade_as[:world]
-            hsh.merge!(:role_id => 0)
-          elsif masquerade_as[:role_id]
-            hsh.merge!(:role_id => masquerade_as[:role_id])
-          elsif masquerade_as[:user_id]
-            hsh.merge!(:user_id => masquerade_as[:user_id])
-          end
-        elsif current_user
-          hsh.merge!(:user_id => current_user.id)
-        end
-
-        self.where(hsh).first || (or_create_new ? self.new(hsh) : nil)
-      end
-
   end
 end

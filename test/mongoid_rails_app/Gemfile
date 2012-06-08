@@ -1,12 +1,19 @@
 source :rubygems
 
 gem 'rails', '~> 3.2'
-gem 'devise', '~> 2.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'mongoid', '~> 2.4'
+gem 'bson'
+
+# gem 'mongoid', '~> 3.0.0.rc'
+# gem 'moped'
+
+
+gem 'devise', '~> 2.1'
+
 gem 'netzke-core'
 
 group :development, :test do
@@ -20,12 +27,18 @@ group :development, :test do
 end
 
 group :development do
-  gem 'mysql2'
+  # gem 'mysql2'
 end
 
 group :test do
-  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'mongoid', '~> 2.4'
+  gem 'bson'
+
+  # gem 'mongoid', '~> 3.0.0.rc'
+  # gem 'moped'
 
   gem 'pickle'
-  gem 'database_cleaner', :git => ''
+
+  # ensure use of version that also supports Mongoid 3+ (June 2012)
+  gem 'database_cleaner', :git => 'git://github.com/bmabey/database_cleaner.git'
 end
