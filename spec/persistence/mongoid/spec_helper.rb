@@ -23,6 +23,5 @@ RSpec.configure do |config|
   end
 end
 
-
 require 'persistence/spec_helper'
 

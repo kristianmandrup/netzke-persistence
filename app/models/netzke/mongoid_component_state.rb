@@ -21,8 +21,8 @@
 # == Class-level configuration:
 # * +masquerade_as_session_key+ - defaults to :masquerade_as
 #
-module Mongoid
-  class NetzkeComponentState
+module Netzke
+  class MongoidComponentState
     include Mongoid::Document
     include Mongoid::Timestamps
 
@@ -74,6 +74,8 @@ module Mongoid
 
       protected
 
+        include Netzke::Persistence::ComponentStateMixin
+
         def user_component_that_masquerades_as_role relation
           relation.where 'users.role' => masqueraded_role
         end
@@ -81,7 +83,7 @@ module Mongoid
         def masquerade_hash hsh
           return hsh.merge(:role => nil) if masquerade_as_world?
           return hsh.merge(:role => masqueraded_role) if masqueraded_role
-          return hsh.merge!(:user_id => masqueraded_user_id) if masqueraded_user_id
+          return hsh.merge(:user_id => masqueraded_user_id) if masqueraded_user_id
         end        
     end
   end
